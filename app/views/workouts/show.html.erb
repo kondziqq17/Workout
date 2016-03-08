@@ -1,0 +1,7 @@
+<h2><%= @workout.title %></h2>
+<h3><%= @workout.author %></h3>
+<p><%= @workout.description %></p>
+
+<%= link_to "Back", root_path %>
+<%= link_to "Edit", edit_workout_path(@workout) %>
+<%= link_to "Delete", workout_path(@workout), method: :delete, data: { confirm: "Are you sure?" } %>
