@@ -1,7 +1,13 @@
 class WorkoutsController < ApplicationController
 	before_action :find_workout, only: [:show, :edit, :update, :destroy]
+
 def index
-	@workouts = Workout.all.order("created_at DESC")
+	if params[:category].blank?
+		@workouts = Workout.all.order("created_at DESC")
+	else
+		@category_id = Category.find_by(name: params[:category]).id
+		@workouts = Workout.where(:category_id => @category_id).order("created_at DESC")
+	end
 end
 
 def show
@@ -9,10 +15,12 @@ end
 
 def new
 	@workout = current_user.workouts.build
+	@categories = Category.all.map{ |c| [c.name, c.id]}
 end
 
 def create
 	@workout = current_user.workouts.build(workout_params)
+	@workout.category_id = params[:category_id]
 
 	if @workout.save
 		redirect_to root_path
@@ -22,9 +30,11 @@ def create
 end
 
 def edit
+	@categories = Category.all.map{ |c| [c.name, c.id]}
 end
 
 def update
+	@workout.category_id = params[:category_id]
 	if @workout.update(workout_params)
 		redirect_to workout_path(@workout)
 	else
@@ -40,7 +50,7 @@ end
 private
 
 def workout_params
-	params.require(:workout).permit(:title, :description, :author)
+	params.require(:workout).permit(:title, :description, :author, :category_id)
 end
 
 def find_workout

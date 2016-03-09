@@ -1,5 +1,6 @@
 <h2><%= @workout.title %></h2>
 <h3><%= @workout.author %></h3>
+<h4>Category: <%= @workout.category.name %></h4>
 <p><%= @workout.description %></p>
 
 <%= link_to "Back", root_path %>

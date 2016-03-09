@@ -1,3 +1,13 @@
+<h1 class="current-category>"><%= params[:category] %></h1>
+
+<% if @workouts.count == 0 %>
+
+	<h1>There are no workouts currently in this category</h1>
+
+<% else	%>	
+
 <% @workouts.each do |workout| %>
 	<h2><%= link_to workout.title, workout_path(workout) %></h2>
+	<% end %>
+	
 <% end %>
