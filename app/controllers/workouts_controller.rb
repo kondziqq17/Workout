@@ -8,11 +8,11 @@ def show
 end
 
 def new
-	@workout = Workout.new
+	@workout = current_user.workouts.build
 end
 
 def create
-	@workout = Workout.new(workout_params)
+	@workout = current_user.workouts.build(workout_params)
 
 	if @workout.save
 		redirect_to root_path
