@@ -6,8 +6,18 @@
 
 <% else	%>	
 
-<% @workouts.each do |workout| %>
-	<h2><%= link_to workout.title, workout_path(workout) %></h2>
-	<% end %>
-	
-<% end %>
+ <div class="row">
+
+	 <% @workouts.each do |workout| %>
+
+		<div class="col-md-3">
+		   <a href="/workouts/<%= workout.id %>">
+			 <%= image_tag workout.workout_img.url(:workout_index), class: "workout" %>
+			</a>
+		</div>
+
+	  <% end %>
+
+	  </div>
+		
+ <% end %>

@@ -1,7 +1,27 @@
-<h2><%= @workout.title %></h2>
-<h3><%= @workout.author %></h3>
-<h4>Category: <%= @workout.category.name %></h4>
-<p><%= @workout.description %></p>
+<div class="row">
+
+	<div class="col-md-4">
+
+	<%= image_tag @workout.workout_img.url(:workout_show), class: "workout_show" %>
+
+	</div>
+	<div class="col-md-8">
+	<h2><%= @workout.title %></h2>
+	<h3><%= @workout.author %></h3>
+	<p><%= @workout.description %></p>
+	</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<!-- where the reviews/ratings will go -->
+
+</div>
+
+</div>
 
 <%= link_to "Back", root_path %>
 

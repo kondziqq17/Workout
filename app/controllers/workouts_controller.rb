@@ -50,7 +50,7 @@ end
 private
 
 def workout_params
-	params.require(:workout).permit(:title, :description, :author, :category_id)
+	params.require(:workout).permit(:title, :description, :author, :category_id, :workout_img)
 end
 
 def find_workout
