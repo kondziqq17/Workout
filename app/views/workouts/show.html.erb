@@ -2,17 +2,23 @@
 
 	<div class="col-md-4">
 
-	<%= image_tag @workout.workout_img.url(:workout_show), class: "workout_show" %>
+	<%= image_tag @workout.workout_img.url(:workout_show), class: "workout-show" %>
 
 	</div>
+
 	<div class="col-md-8">
-	<h2><%= @workout.title %></h2>
-	<h3><%= @workout.author %></h3>
-	<h2>Average Rating</h2>
-	<div class="average-review-rating" data-score=<%= @average_review %>></div>
-	<span>Based on <%= @workout.reviews.count %> reviews </span>
-	<p><%= @workout.description %></p>
+
+	<div class="workout-info">
+
+		<h2 class="workout-title"><%= @workout.title %></h2>
+		<h3 class="workout-author"><span>From</span><%= @workout.author %></h3>
+		<h2 class="avg-rating">Average Rating</h2>
+		<div class="average-review-rating" data-score=<%= @average_review %>></div>
+		<span class="number-of-reviews">Based on <%= @workout.reviews.count %> reviews</span>
+		<p class="workout-desc"><%= @workout.description %></p>
+	
 	</div>
+ </div>
 
 </div>
 
@@ -20,29 +26,34 @@
 
 <div class="col-md-4">
 
+<div class="reviews">
+
 <!-- where the reviews/ratings will go -->
+<h1>Reviews</h1>
 <%= render @workout.reviews %>
 
 <div>
-	<%= link_to "Add Review", new_workout_review_path(@workout) %>
-</div>
+			<%= link_to "Add Review", new_workout_review_path(@workout), class: "btn btn-custom" %>
+		</div>
+	  </div>
+	</div>
+ </div>
 
-</div>
+<div class="links btn-group">
 
-</div>
+	<%= link_to "Back", root_path, class: "btn btn-custom" %>
 
-<%= link_to "Back", root_path %>
+	<% if user_signed_in? %>
 
-<% if user_signed_in? %>
+		<% if @workout.user_id == current_user.id %>
 
-	<% if @workout.user_id == current_user.id %>
+		<%= link_to "Edit", edit_workout_path(@workout), class: "btn btn-custom" %>
+		<%= link_to "Delete", workout_path(@workout), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-custom" %>
+		<% end %>
 
-	<%= link_to "Edit", edit_workout_path(@workout) %>
-	<%= link_to "Delete", workout_path(@workout), method: :delete, data: { confirm: "Are you sure?" } %>
-	<% end %>
+		<% end %>
 
-	<% end %>
-
+	 </div>
 
 	<script> 
 		$('.review-rating').raty({

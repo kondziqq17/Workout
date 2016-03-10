@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
 	before_action :find_workout
 	before_action :find_review, only: [:edit, :update, :destroy]
+	before_action :authenticate_user!, only: [:new, :edit]
 
 	def new
 		@review = Review.new	
@@ -49,3 +50,4 @@ class ReviewsController < ApplicationController
 			@review = Review.find(params[:id])
 		end
 	end
+&copy;
