@@ -11,6 +11,11 @@ def index
 end
 
 def show
+	if @workout.reviews.blank?
+		@average_review = 0
+	else
+		@average_review = @workout.reviews.average(:rating).round(2)
+	end
 end
 
 def new

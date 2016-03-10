@@ -8,6 +8,9 @@
 	<div class="col-md-8">
 	<h2><%= @workout.title %></h2>
 	<h3><%= @workout.author %></h3>
+	<h2>Average Rating</h2>
+	<div class="average-review-rating" data-score=<%= @average_review %>></div>
+	<span>Based on <%= @workout.reviews.count %> reviews </span>
 	<p><%= @workout.description %></p>
 	</div>
 
@@ -18,6 +21,11 @@
 <div class="col-md-4">
 
 <!-- where the reviews/ratings will go -->
+<%= render @workout.reviews %>
+
+<div>
+	<%= link_to "Add Review", new_workout_review_path(@workout) %>
+</div>
 
 </div>
 
@@ -34,3 +42,24 @@
 	<% end %>
 
 	<% end %>
+
+
+	<script> 
+		$('.review-rating').raty({
+			readOnly: true,
+			score: function() {
+				return $(this).attr('data-score');
+			},
+			path: '/assets/'
+		});
+	</script>
+
+	<script>
+		$('.average-review-rating').raty({
+			readOnly: true,
+			path: '/assets/',
+			score: function() {
+				return $(this).attr('data-score')
+			}
+		});
+	</script>
